@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Watch Studio Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Apple Watch <span class="highlight">Studio</span></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Design Your Perfect Apple Watch</h1>
+            <p>Customize every detail to match your style.</p>
+            <a href="#customizer" class="cta-button">Get Started</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://www.apple.com/newsroom/images/2024/09/introducing-apple-watch-series-10/article/Apple-Watch-Series-10-watch-face-Flux-240909_inline.jpg.large.jpg" alt="Apple Watch">
+        </div>
+    </header>
+
+    <section id="customizer" class="customization">
+        <div class="customizer-header">
+            <h2>Collections</h2>
+            <select class="collection-dropdown" onchange="selectCollection(this.value)">
+                <option value="Series 10">Apple Watch Series 10</option>
+                <option value="SE">Apple Watch SE</option>
+                <option value="Hermès Series 10">Apple Watch Hermès Series 10</option>
+            </select>
+        </div>
+
+        <div id="collection-content" class="collection-content">
+            <!-- Content dynamically updated based on selected collection -->
+            <div class="collection-details">
+                <img id="collection-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgBpd6OUgaoWFe7tZcLsp4uBFePVdt-5i9Xg&s" alt="Series 10 Watch" />
+                <p><strong>Selected Collection:</strong> <span id="collection-name">Series 10</span></p>
+                <p><strong>Size:</strong> <span id="collection-size">46mm</span></p>
+                <p><strong>Cost:</strong> <span id="collection-price">$399</span></p>
+                <p><strong>Case:</strong> <span id="selected-case">Aluminum</span></p>
+                <p><strong>Band:</strong> <span id="selected-band">Solo Loop</span></p>
+            </div>
+        </div>
+
+        <div class="customizer-options">
+            <!-- Size Selection -->
+            <div class="step" id="sizes">
+                <h2>Select Your Size</h2>
+                <div class="size-toggle">
+                    <button class="size-option" onclick="selectSize('42mm')">42mm</button>
+                    <button class="size-option" onclick="selectSize('46mm')">46mm</button>
+                </div>
+            </div>
+
+            <!-- Case Selection -->
+            <div class="step" id="cases">
+                <h2>Select Your Case</h2>
+                <div class="options-grid">
+                    <button class="option" onclick="selectCase('Aluminum')">Aluminum</button>
+                    <button class="option" onclick="selectCase('Titanium')">Titanium</button>
+                </div>
+            </div>
+
+            <!-- Band Selection -->
+            <div class="step" id="bands">
+                <h2>Select Your Band</h2>
+                <div class="options-grid">
+                    <button class="option" onclick="selectBand('Stainless Steel')">Stainless Steel</button>
+                    <button class="option" onclick="selectBand('Sport Loop')">Sport Loop</button>
+                    <button class="option" onclick="selectBand('Sport Band')">Sport Band</button>
+                    <button class="option" onclick="selectBand('FineWoven')">FineWoven</button>
+                    <button class="option" onclick="selectBand('Braided Solo Loop')">Braided Solo Loop</button>
+                    <button class="option" onclick="selectBand('Solo Loop')">Solo Loop</button>
+                    <button class="option" onclick="selectBand('Nike Sport Loop')">Nike Sport Loop</button>
+                    <button class="option" onclick="selectBand('Nike Sport Band')">Nike Sport Band</button>
+                </div>
+            </div>
+
+            <button class="save-button" onclick="navigateToCheckout()">Save & Proceed</button>
+        </div>
+    </section>
+
+    <script>
+        let selectedOptions = {
+            collection: 'Series 10',
+            size: '46mm',
+            case: 'Aluminum',
+            band: 'Solo Loop',
+            cost: '$399'
+        };
+
+        function selectCollection(collection) {
+            selectedOptions.collection = collection;
+            document.getElementById('collection-name').innerText = collection;
+
+            let imageMap = {
+                'Series 10': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgBpd6OUgaoWFe7tZcLsp4uBFePVdt-5i9Xg&s',
+                'SE': 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MXL33ref_FV98_VW_34FR+watch-case-44-aluminum-midnight-nc-se_VW_34FR+watch-face-44-aluminum-midnight-se_VW_34FR?wid=752&hei=720&bgc=fafafa&trim=1&fmt=p-jpg&qlt=80&.v=QkF3S1BVQk9QZEd6RHBRdGFtK2hnMG5TeWJ6QW43NUFnQ2V4cmRFc1VnWWxvMTNVeXVWaTk0Ui9PSEVKVVU0dzN2QVRTWW5kR2Jad3ptYU8zZ21EUWZmQXlUU2xCQ2pTN3lrcDE0UU1hK0ZpRFN2VTEyRk9ZNEFubk9kM01kUmIySDNGVkFuTWJDdzY3LzhwNXhBeGdqanlpa2c4cm9CV25oRTZ3N0FCaUk1SHU3NmZyQzBTVVZ5ZWlSanV5V2tOdkZ1emhkYWNycmJka1dOU01FKzNBdFRUV0g5d1FoYmhBY0FhQ1ZnNFdFRFI2SjAxL1NHYWFLQ2hLdGdQSUw4bw',
+                'Hermès Series 10': 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MXJW3ref_VW_34FR+watch-case-46-titanium-silver-cell-hermes10s_VW_34FR+watch-face-46-radial-blanc-hermes10s_VW_34FR?wid=752&hei=720&bgc=fafafa&trim=1&fmt=p-jpg&qlt=80&.v=bmlDS2tTT2I3YXhiY1p5bVdLVXRVZm9DdHd2YU5FTjZTSXRTTFUzdU1PdUNHN25LcnpMK29yekV1VVdNbVVYRG02cXZmNmNVMWdYa3dYVFN4R1NmYm5qblBjd2JiYm5raG5NaEt4aVI1UUlNNlNmamNYYlk0ZkVxWkdCb3hBb01USHZVNzlpcjF1MTlOMG5yeVZmZ0hsRVpGM0VTYkFEYWkrVUpmdm5HMEsvZzdYL1dmbHI1ck0vS0dDZmJkTUNtcXlYK1hMV0U1ZW9xcCtlRHF3V3gyU0tNU3RLbXptWTI2bTQ2OSsxejFuT01KenE3M0tYYXpFekdUcVplVlI0eQ'
+            };
+            document.getElementById('collection-image').src = imageMap[collection];
+            document.getElementById('collection-size').innerText = '46mm';
+            document.getElementById('collection-price').innerText = selectedOptions.cost;
+        }
+
+        function selectSize(size) {
+            selectedOptions.size = size;
+            document.getElementById('collection-size').innerText = size;
+        }
+
+        function selectCase(caseType) {
+            selectedOptions.case = caseType;
+            document.getElementById('selected-case').innerText = caseType;
+        }
+
+        function selectBand(bandType) {
+            selectedOptions.band = bandType;
+            document.getElementById('selected-band').innerText = bandType;
+        }
+
+        function navigateToCheckout() {
+            const {
+                collection,
+                size,
+                case: caseType,
+                band
+            } = selectedOptions;
+
+            const formattedCollection = collection.toLowerCase().replace(/\s/g, '-');
+            const formattedCase = caseType.toLowerCase();
+            const formattedBand = band.toLowerCase().replace(/\s/g, '-');
+            const formattedSize = size.toLowerCase();
+
+            const url = `https://www.apple.com/shop/buy-watch/apple-watch-${formattedCollection}/${formattedSize}-cellular-${formattedCase}-${formattedBand}-onesize`;
+
+            console.log("Navigating to URL:", url);
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+
+</html>
